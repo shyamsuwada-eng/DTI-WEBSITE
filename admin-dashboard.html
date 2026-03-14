@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Admin Dashboard | DTI Lab – Lendi Institute</title>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="CSS/style.css">
+	<style>
+		main {
+			margin-top: 70px;
+		}
+
+		.container {
+			max-width: 1400px;
+			margin: 0 auto;
+			padding: 40px 20px;
+		}
+
+		.dashboard-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 40px;
+			flex-wrap: wrap;
+			gap: 20px;
+		}
+
+		.dashboard-title {
+			font-size: 32px;
+			font-weight: 800;
+			color: var(--primary);
+			margin: 0 0 8px;
+		}
+
+		.dashboard-subtitle {
+			font-size: 16px;
+			color: var(--muted);
+			margin: 0;
+		}
+
+		/* Stats Grid */
+		.stats-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+			gap: 24px;
+			margin-bottom: 40px;
+		}
+
+		.stat-card {
+			background: linear-gradient(135deg, var(--primary), var(--accent));
+			color: #fff;
+			padding: 32px 24px;
+			border-radius: 12px;
+			box-shadow: var(--shadow-md);
+		}
+
+		.stat-value {
+			font-size: 48px;
+			font-weight: 800;
+			margin-bottom: 8px;
+			line-height: 1;
+		}
+
+		.stat-label {
+			font-size: 16px;
+			font-weight: 500;
+			opacity: 0.9;
+		}
+
+		/* Controls Bar */
+		.controls-bar {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 24px;
+			flex-wrap: wrap;
+			gap: 16px;
+			background: var(--card-bg);
+			padding: 16px 24px;
+			border-radius: 12px;
+			box-shadow: var(--shadow-sm);
+			border: 1px solid var(--border);
+		}
+
+		.search-box {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			flex: 1;
+			max-width: 400px;
+		}
+
+		.search-box input {
+			width: 100%;
+			padding: 10px 16px;
+			border-radius: 8px;
+			border: 1px solid var(--border);
+			background: var(--bg);
+			font-family: inherit;
+		}
+
+		.filters {
+			display: flex;
+			gap: 12px;
+		}
+
+		.filters select {
+			padding: 10px 16px;
+			border-radius: 8px;
+			border: 1px solid var(--border);
+			background: var(--bg);
+			font-family: inherit;
+		}
+
+		/* Table Styles */
+		.table-container {
+			background: var(--card-bg);
+			border-radius: 12px;
+			box-shadow: var(--shadow-md);
+			overflow-x: auto;
+			border: 1px solid var(--border);
+		}
+
+		.projects-table {
+			width: 100%;
+			border-collapse: collapse;
+			background: var(--card-bg);
+			border-radius: 8px;
+			overflow: hidden;
+			box-shadow: var(--shadow-md);
+		}
+
+		.projects-table thead {
+			background: var(--bg);
+			border-bottom: 2px solid var(--border);
+		}
+
+		.projects-table th {
+			text-align: left;
+			padding: 16px;
+			font-weight: 600;
+			color: var(--muted);
+			font-size: 14px;
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+		}
+
+		.projects-table td {
+			padding: 16px;
+			border-top: 1px solid var(--border);
+			font-size: 14px;
+		}
+
+		.projects-table tbody tr:hover {
+			background: var(--bg);
+		}
+
+		.project-name {
+			font-weight: 600;
+			color: var(--primary);
+			margin-bottom: 4px;
+		}
+
+		.project-domain {
+			font-size: 13px;
+			color: var(--muted);
+		}
+
+		/* Status Badges */
+		.status-badge {
+			display: inline-block;
+			padding: 6px 12px;
+			border-radius: 20px;
+			font-size: 12px;
+			font-weight: 600;
+			text-transform: uppercase;
+		}
+
+		.status-pending {
+			background: #fef3c7;
+			color: #b45309;
+		}
+
+		.status-approved {
+			background: #d1fae5;
+			color: #047857;
+		}
+
+		.status-rejected {
+			background: #fee2e2;
+			color: #b91c1c;
+		}
+
+		/* Action Buttons */
+		.action-btns {
+			display: flex;
+			gap: 8px;
+		}
+
+		.btn-action {
+			padding: 6px 12px;
+			border-radius: 6px;
+			border: none;
+			font-weight: 600;
+			font-size: 13px;
+			cursor: pointer;
+			transition: all 0.2s;
+		}
+
+		.btn-view {
+			background: var(--bg);
+			color: var(--primary);
+			border: 1px solid var(--border);
+		}
+
+		.btn-view:hover {
+			background: var(--border);
+		}
+
+		.btn-approve {
+			background: #10b981;
+			color: #fff;
+		}
+
+		.btn-approve:hover {
+			background: #059669;
+		}
+
+		.btn-reject {
+			background: #ef4444;
+			color: #fff;
+		}
+
+		.btn-reject:hover {
+			background: #dc2626;
+		}
+
+		/* Pagination */
+		.pagination {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 16px;
+			background: var(--bg);
+			border-top: 1px solid var(--border);
+		}
+
+		.page-info {
+			color: var(--muted);
+			font-size: 14px;
+		}
+
+		.page-controls {
+			display: flex;
+			gap: 8px;
+		}
+
+		.page-btn {
+			padding: 8px 16px;
+			border: 1px solid var(--border);
+			background: var(--card-bg);
+			border-radius: 6px;
+			cursor: pointer;
+			font-weight: 500;
+			font-size: 14px;
+		}
+
+		.page-btn:hover:not(:disabled) {
+			background: var(--primary);
+			color: #fff;
+			border-color: var(--primary);
+		}
+
+		.page-btn:disabled {
+			opacity: 0.5;
+			cursor: not-allowed;
+		}
+
+		@media (max-width: 1024px) {
+			.controls-bar {
+				flex-direction: column;
+				align-items: stretch;
+			}
+
+			.search-box {
+				max-width: none;
+			}
+		}
+
+		@media (max-width: 768px) {
+			main {
+				margin-top: 60px;
+			}
+
+			.container {
+				padding: 24px 16px;
+			}
+
+			.stats-grid {
+				grid-template-columns: 1fr;
+			}
+
+			.action-btns {
+				flex-direction: column;
+			}
+		}
+	</style>
+</head>
+<body>
+
+	<main class="container">
+		<div class="dashboard-header">
+			<div>
+				<h1 class="dashboard-title">Admin Dashboard</h1>
+				<p class="dashboard-subtitle">Manage student projects, approvals, and system settings</p>
+			</div>
+			<div class="user-profile">
+				<!-- This will display the logged-in admin's name/email -->
+				<span style="font-weight: 600; color: var(--primary); background: #e0f2fe; padding: 10px 16px; border-radius: 8px;">Admin View</span>
+			</div>
+		</div>
+
+		<!-- Statistics -->
+		<div class="stats-grid">
+			<div class="stat-card">
+				<div class="stat-value" id="totalProjects">0</div>
+				<div class="stat-label">Total Submissions</div>
+			</div>
+			<div class="stat-card" style="background: linear-gradient(135deg, #10b981, #059669);">
+				<div class="stat-value" id="approvedProjects">0</div>
+				<div class="stat-label">Approved Projects</div>
+			</div>
+			<div class="stat-card" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+				<div class="stat-value" id="pendingProjects">0</div>
+				<div class="stat-label">Pending Review</div>
+			</div>
+		</div>
+
+		<!-- Controls -->
+		<div class="controls-bar">
+			<div class="search-box">
+				<input type="text" placeholder="Search by project name, team lead, or reg number...">
+			</div>
+			<div class="filters">
+				<select id="filterStatus">
+					<option value="all">All Status</option>
+					<option value="pending">Pending</option>
+					<option value="approved">Approved</option>
+					<option value="rejected">Rejected</option>
+				</select>
+				<select id="filterDomain">
+					<option value="all">All Domains</option>
+					<option value="iot">IoT</option>
+					<option value="embedded">Embedded Systems</option>
+					<option value="signal">Signal Processing</option>
+					<option value="robotics">Robotics</option>
+					<option value="wireless">Wireless Communication</option>
+					<option value="other">Other</option>
+				</select>
+			</div>
+		</div>
+
+		<!-- Projects Table -->
+		<div class="table-container">
+			<table class="projects-table">
+				<thead>
+					<tr>
+						<th>Project Details</th>
+						<th>Team Lead</th>
+						<th>Submission Date</th>
+						<th>Status</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody id="projectsTableBody">
+					<!-- Projects will be loaded dynamically here -->
+				</tbody>
+			</table>
+			<div class="pagination">
+				<div class="page-info">Showing 0 to 0 of 0 entries</div>
+				<div class="page-controls">
+					<button class="page-btn" disabled>Previous</button>
+					<button class="page-btn" disabled>Next</button>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<!-- Scripts -->
+	<script src="js/header-loader.js"></script>
+	<script type="module" src="js/admin.js"></script>
+</body>
+</html>

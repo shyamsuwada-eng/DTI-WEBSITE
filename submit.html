@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Submit Project | DTI Lab – Lendi Institute</title>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="CSS/style.css">
+	<style>
+		main {
+			margin-top: 70px;
+		}
+
+		.container {
+			max-width: 900px;
+			margin: 0 auto;
+			padding: 40px 20px;
+		}
+
+		.form-header {
+			margin-bottom: 40px;
+		}
+
+		.form-title {
+			font-size: 32px;
+			font-weight: 800;
+			color: var(--primary);
+			margin: 0 0 12px;
+		}
+
+		.form-subtitle {
+			font-size: 16px;
+			color: var(--muted);
+			margin: 0;
+		}
+
+		.form-card {
+			background: var(--card-bg);
+			padding: 32px;
+			border-radius: 12px;
+			box-shadow: var(--shadow-md);
+		}
+
+		.form-section {
+			margin-bottom: 32px;
+		}
+
+		.section-title {
+			font-size: 18px;
+			font-weight: 700;
+			color: var(--primary);
+			margin: 0 0 20px;
+			padding-bottom: 12px;
+			border-bottom: 2px solid var(--border);
+		}
+
+		.form-group {
+			margin-bottom: 20px;
+		}
+
+		label {
+			display: block;
+			font-weight: 600;
+			margin-bottom: 8px;
+			color: var(--text-dark);
+			font-size: 14px;
+		}
+
+		input[type="text"],
+		input[type="email"],
+		input[type="number"],
+		input[type="date"],
+		input[type="file"],
+		select,
+		textarea {
+			width: 100%;
+			padding: 10px 12px;
+			border-radius: 8px;
+			border: 1px solid var(--border);
+			background: var(--card-bg);
+			color: var(--text-dark);
+			font-family: inherit;
+			font-size: 14px;
+			transition: all 0.2s;
+		}
+
+		input:focus,
+		select:focus,
+		textarea:focus {
+			outline: none;
+			border-color: var(--accent);
+			box-shadow: 0 0 0 3px rgba(0, 119, 200, 0.1);
+		}
+
+		textarea {
+			resize: vertical;
+			min-height: 100px;
+		}
+
+		.form-row {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 20px;
+		}
+
+		.form-row.full {
+			grid-template-columns: 1fr;
+		}
+
+		.helper-text {
+			font-size: 13px;
+			color: var(--muted);
+			margin-top: 6px;
+		}
+
+		.file-info {
+			font-size: 13px;
+			color: var(--muted);
+			margin-top: 8px;
+		}
+
+		.team-section {
+			background: var(--bg);
+			padding: 16px;
+			border-radius: 8px;
+			margin-top: 12px;
+		}
+
+		.team-member {
+			display: grid;
+			grid-template-columns: 1.5fr 1fr auto;
+			gap: 12px;
+			margin-bottom: 12px;
+			align-items: flex-end;
+		}
+
+		.team-member input {
+			width: 100%;
+		}
+
+		.btn-remove {
+			padding: 10px 12px;
+			background: var(--error);
+			color: #fff;
+			border: none;
+			border-radius: 6px;
+			cursor: pointer;
+			font-weight: 600;
+			font-size: 13px;
+		}
+
+		.btn-add {
+			padding: 10px 14px;
+			background: var(--accent);
+			color: #fff;
+			border: none;
+			border-radius: 8px;
+			cursor: pointer;
+			font-weight: 600;
+			font-size: 14px;
+			margin-top: 12px;
+		}
+
+		.form-actions {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 12px;
+			margin-top: 32px;
+		}
+
+		.btn-submit {
+			padding: 12px 24px;
+			background: linear-gradient(135deg, var(--primary), var(--accent));
+			color: #fff;
+			border: none;
+			border-radius: 8px;
+			font-weight: 700;
+			font-size: 14px;
+			cursor: pointer;
+			transition: all 0.2s;
+		}
+
+		.btn-submit:hover {
+			transform: translateY(-2px);
+			box-shadow: var(--shadow-lg);
+		}
+
+		.btn-cancel {
+			padding: 12px 24px;
+			background: var(--card-bg);
+			color: var(--primary);
+			border: 1px solid var(--border);
+			border-radius: 8px;
+			font-weight: 700;
+			font-size: 14px;
+			cursor: pointer;
+			transition: all 0.2s;
+		}
+
+		.btn-cancel:hover {
+			background: var(--bg);
+		}
+
+		@media (max-width: 768px) {
+			main {
+				margin-top: 60px;
+			}
+
+			.container {
+				padding: 24px 16px;
+			}
+
+			.form-card {
+				padding: 20px;
+			}
+
+			.form-row {
+				grid-template-columns: 1fr;
+			}
+
+			.form-actions {
+				grid-template-columns: 1fr;
+			}
+
+			.team-member {
+				grid-template-columns: 1fr 1fr auto;
+			}
+		}
+
+		@media (max-width: 480px) {
+			.team-member {
+				grid-template-columns: 1fr;
+				gap: 8px;
+			}
+
+			.team-member input {
+				width: 100%;
+			}
+
+			.btn-remove {
+				width: 100%;
+				margin-top: 8px;
+			}
+		}
+	</style>
+</head>
+<body>
+
+	<main class="container">
+		<div class="form-header">
+			<h1 class="form-title">Submit Your Project</h1>
+			<p class="form-subtitle">Share your innovative project with the DTI Lab community</p>
+		</div>
+
+		<div class="form-card">
+			<form id="projectForm">
+				<!-- Project Information -->
+				<div class="form-section">
+					<h3 class="section-title">Project Information</h3>
+
+					<div class="form-group">
+						<label for="projectName">Project Name *</label>
+						<input type="text" id="projectName" placeholder="Enter project name" required>
+					</div>
+
+					<div class="form-row">
+						<div class="form-group">
+							<label for="domain">Domain *</label>
+							<select id="domain" required>
+								<option value="">Select Domain</option>
+								<option value="iot">IoT</option>
+								<option value="embedded">Embedded Systems</option>
+								<option value="signal">Signal Processing</option>
+								<option value="robotics">Robotics</option>
+								<option value="wireless">Wireless Communication</option>
+								<option value="other">Other</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="year">Year of Study *</label>
+							<select id="year" required>
+								<option value="">Select Year</option>
+								<option value="2">2nd Year</option>
+								<option value="3">3rd Year</option>
+								<option value="4">4th Year</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="description">Project Description *</label>
+						<textarea id="description" placeholder="Describe your project, objectives, and implementation..." required></textarea>
+						<div class="helper-text">Provide a comprehensive description of your project (minimum 50 characters)</div>
+					</div>
+				</div>
+
+				<!-- Team Members -->
+				<div class="form-section">
+					<h3 class="section-title">Team Members</h3>
+					<p class="helper-text">Add all team members involved in the project</p>
+
+					<div class="team-section" id="teamSection">
+						<div class="team-member">
+							<input type="text" class="team-input" placeholder="Team member name" value="">
+							<input type="text" class="team-reg" placeholder="Registration Number" value="">
+							<label style="margin: 0; font-size: 12px; color: var(--muted);">Lead</label>
+						</div>
+					</div>
+
+					<button type="button" class="btn-add" onclick="addTeamMember()">+ Add Team Member</button>
+				</div>
+
+				<!-- Documentation -->
+				<div class="form-section">
+					<h3 class="section-title">Documentation</h3>
+
+					<div class="form-group">
+						<label for="document">Upload Documentation (PDF, DOC) *</label>
+						<input type="file" id="document" accept=".pdf,.doc,.docx" required>
+						<div class="file-info">Maximum file size: 10MB. Supported formats: PDF, DOC, DOCX</div>
+					</div>
+
+					<div class="form-group">
+						<label for="code">Source Code (ZIP) *</label>
+						<input type="file" id="code" accept=".zip">
+						<div class="file-info">Compress all source code files into a ZIP archive</div>
+					</div>
+
+					<div class="form-group">
+						<label for="links">Project Links (GitHub, Website, etc.)</label>
+						<input type="text" id="links" placeholder="https://github.com/...">
+						<div class="helper-text">Provide links to source code repositories or project website</div>
+					</div>
+				</div>
+
+				<!-- Group Photo -->
+				<div class="form-section">
+					<h3 class="section-title">Group Photo</h3>
+
+					<div class="form-group">
+						<label for="groupPhoto">Upload Group Photo (JPG, PNG)</label>
+						<input type="file" id="groupPhoto" accept=".jpg,.jpeg,.png,.gif">
+						<div class="file-info">Maximum file size: 10MB. Supported formats: JPG, PNG, GIF</div>
+					</div>
+				</div>
+
+				<!-- Project Presentation -->
+				<div class="form-section">
+					<h3 class="section-title">Project Presentation</h3>
+
+					<div class="form-group">
+						<label for="presentation">Upload Presentation (PPT, PDF)</label>
+						<input type="file" id="presentation" accept=".ppt,.pptx,.pdf">
+						<div class="file-info">Maximum file size: 25MB. Supported formats: PPT, PPTX, PDF</div>
+					</div>
+				</div>
+
+				<!-- Project Video -->
+				<div class="form-section">
+					<h3 class="section-title">Project Video</h3>
+
+					<div class="form-group">
+						<label for="videoUrl">Video URL (YouTube, Vimeo, etc.)</label>
+						<input type="text" id="videoUrl" placeholder="https://youtube.com/watch?v=...">
+						<div class="helper-text">Share a link to your project demonstration video (optional)</div>
+					</div>
+
+					<div class="form-group">
+						<label for="videoFile">Or Upload Video File (MP4, WebM)</label>
+						<input type="file" id="videoFile" accept=".mp4,.webm,.mov">
+						<div class="file-info">Maximum file size: 100MB. Supported formats: MP4, WebM, MOV</div>
+					</div>
+				</div>
+
+				<!-- Submission -->
+				<div class="form-actions">
+					<button type="submit" class="btn-submit">Submit Project</button>
+					<button type="button" class="btn-cancel" onclick="window.history.back()">Cancel</button>
+				</div>
+			</form>
+		</div>
+	</main>
+
+	<!-- Footer -->
+	<footer>
+		<div class="footer-container">
+			<div class="footer-content">
+				<div class="footer-section">
+					<h3>About Lendi Institute</h3>
+					<p>Lendi Institute of Engineering & Technology is committed to academic excellence, research, and industry collaboration.</p>
+				</div>
+				<div class="footer-section">
+					<h3>Contact Us</h3>
+					<p><strong>Email:</strong> dtilab@lendi.edu.in</p>
+					<p><strong>Phone:</strong> 9490344747</p>
+				</div>
+			</div>
+			<div class="footer-bottom">
+				<p>&copy; 2024 Lendi Institute. All rights reserved.</p>
+			</div>
+		</div>
+	</footer>
+
+	<!-- Load Header Dynamically -->
+	<script src="js/header-loader.js"></script>
+	<script type="module" src="js/submit.js"></script>
+	<script>
+		function addTeamMember() {
+			const teamSection = document.getElementById('teamSection');
+			const newMember = document.createElement('div');
+			newMember.className = 'team-member';
+			newMember.innerHTML = `
+				<input type="text" class="team-input" placeholder="Team member name" required>
+				<input type="text" class="team-reg" placeholder="Registration Number" required>
+				<button type="button" class="btn-remove" onclick="this.parentElement.remove()">Remove</button>
+			`;
+			teamSection.appendChild(newMember);
+		}
+	</script>
+</body>
+</html>

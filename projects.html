@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Projects | DTI Lab – ECE | Lendi Institute</title>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="CSS/style.css">
+	<style>
+		main {
+			margin-top: 70px;
+		}
+
+		.container {
+			max-width: 1200px;
+			margin: 0 auto;
+			padding: 40px 20px;
+		}
+
+		.page-header {
+			margin-bottom: 40px;
+		}
+
+		.page-title {
+			font-size: 32px;
+			font-weight: 800;
+			color: var(--primary);
+			margin: 0 0 12px;
+		}
+
+		.page-subtitle {
+			font-size: 16px;
+			color: var(--muted);
+			margin: 0;
+		}
+
+		/* Filter bar */
+		.filters {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 12px;
+			align-items: center;
+			margin: 24px 0;
+			padding: 16px;
+			background: var(--card-bg);
+			border-radius: 8px;
+			box-shadow: var(--shadow-sm);
+		}
+
+		.select, .search {
+			padding: 10px 12px;
+			border-radius: 8px;
+			border: 1px solid var(--border);
+			background: var(--card-bg);
+			font-family: inherit;
+			font-size: 14px;
+		}
+
+		.select {
+			min-width: 180px;
+		}
+
+		.search {
+			flex: 1;
+			min-width: 200px;
+		}
+
+		.add-btn {
+			background: var(--primary);
+			color: #fff;
+			border: none;
+			padding: 10px 16px;
+			border-radius: 8px;
+			font-weight: 600;
+			cursor: pointer;
+			transition: all 0.2s ease;
+		}
+
+		.add-btn:hover {
+			background: var(--primary-dark);
+		}
+
+		/* Projects grid */
+		.grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+			gap: 20px;
+			margin-top: 24px;
+		}
+
+		.card {
+			background: var(--card-bg);
+			padding: 16px;
+			border-radius: 10px;
+			box-shadow: var(--shadow-md);
+			display: flex;
+			flex-direction: column;
+			transition: all 0.2s ease;
+		}
+
+		.card:hover {
+			transform: translateY(-4px);
+			box-shadow: var(--shadow-lg);
+		}
+
+		.card .top {
+			display: flex;
+			gap: 12px;
+			margin-bottom: 12px;
+		}
+
+		.thumb {
+			width: 110px;
+			height: 90px;
+			object-fit: cover;
+			border-radius: 8px;
+		}
+
+		.tag {
+			background: #eef7ff;
+			color: var(--primary);
+			padding: 6px 8px;
+			border-radius: 6px;
+			font-weight: 700;
+			font-size: 12px;
+			display: inline-block;
+		}
+
+		.title {
+			font-weight: 800;
+			color: var(--primary);
+			margin: 8px 0 4px;
+			font-size: 16px;
+		}
+
+		.team {
+			font-size: 13px;
+			color: var(--muted);
+			margin-bottom: 8px;
+		}
+
+		.actions {
+			display: flex;
+			gap: 8px;
+			margin-top: auto;
+			flex-wrap: wrap;
+		}
+
+		.actions button {
+			padding: 8px 10px;
+			border-radius: 8px;
+			border: 1px solid var(--border);
+			background: var(--card-bg);
+			color: var(--primary);
+			font-weight: 600;
+			font-size: 13px;
+			cursor: pointer;
+			transition: all 0.2s;
+		}
+
+		.actions button:hover {
+			background: var(--bg);
+		}
+
+		.download {
+			background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+			color: #fff;
+			border: none;
+		}
+
+		.download:hover {
+			opacity: 0.9;
+		}
+
+		@media (max-width: 768px) {
+			main {
+				margin-top: 60px;
+			}
+
+			.container {
+				padding: 24px 16px;
+			}
+
+			.grid {
+				grid-template-columns: 1fr;
+			}
+
+			.filters {
+				flex-direction: column;
+			}
+
+			.select, .search {
+				width: 100%;
+			}
+		}
+	</style>
+</head>
+<body>
+
+	<main class="container">
+		<div class="page-header">
+			<h1 class="page-title">Student Projects</h1>
+			<p class="page-subtitle">Explore and discover innovative projects developed by our students</p>
+		</div>
+
+		<div class="filters">
+			<select class="select">
+				<option>All Categories</option>
+				<option>IoT</option>
+				<option>Embedded Systems</option>
+				<option>Signal Processing</option>
+				<option>Robotics</option>
+				<option>Wireless Communication</option>
+			</select>
+			<input type="text" class="search" placeholder="Search projects...">
+			<button class="add-btn">+ Add Project</button>
+		</div>
+
+		<div class="grid" id="projectsGrid">
+			<!-- Projects will be loaded here -->
+		</div>
+	</main>
+
+	<!-- Footer -->
+	<footer>
+		<div class="footer-container">
+			<div class="footer-content">
+				<div class="footer-section">
+					<h3>About Lendi Institute</h3>
+					<p>Lendi Institute of Engineering & Technology is committed to academic excellence, research, and industry collaboration, preparing students for successful careers in engineering and technology.</p>
+				</div>
+				<div class="footer-section">
+					<h3>Contact Us</h3>
+					<p><strong>Phone:</strong> 9490344747, 9490304747</p>
+					<p><strong>Email:</strong> principal@lendi.edu.in</p>
+				</div>
+				<div class="footer-section">
+					<h3>Quick Links</h3>
+					<p><a href="index.html">Home</a> • <a href="about.html">About</a> • <a href="submit.html">Submit</a></p>
+				</div>
+			</div>
+			<div class="footer-bottom">
+				<p>&copy; 2024 Lendi Institute. All rights reserved.</p>
+			</div>
+		</div>
+	</footer>
+
+	<!-- Load Header Dynamically -->
+	<script src="js/header-loader.js"></script>
+	<script type="module" src="js/projects.js"></script>
+</body>
+</html>

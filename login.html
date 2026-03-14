@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Login DTI Lab – Lendi Institute</title>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="CSS/style.css">
+	<style>
+		:root {
+			--primary: #003366;
+			--primary-dark: #002244;
+			--accent: #0077c8;
+			--accent-light: #4da6e7;
+			--muted: #6b7280;
+			--bg: #f0f4f8;
+			--card-bg: rgba(255, 255, 255, 0.85);
+		}
+		
+		* { box-sizing: border-box; }
+		
+		body {
+			font-family: 'Inter', system-ui, -apple-system, sans-serif;
+			margin: 0;
+			color: #0f172a;
+			background: linear-gradient(135deg, #e0eaf5 0%, #f8fafc 100%);
+			line-height: 1.5;
+			min-height: 100vh;
+			position: relative;
+			overflow-x: hidden;
+		}
+
+		/* Animated Background Shapes */
+		.bg-shape {
+			position: absolute;
+			border-radius: 50%;
+			background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+			filter: blur(80px);
+			opacity: 0.15;
+			z-index: -1;
+			animation: float 20s infinite alternate ease-in-out;
+		}
+
+		.shape-1 {
+			width: 600px;
+			height: 600px;
+			top: -100px;
+			left: -200px;
+			animation-delay: 0s;
+		}
+
+		.shape-2 {
+			width: 500px;
+			height: 500px;
+			bottom: -150px;
+			right: -100px;
+			background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 100%);
+			animation-duration: 25s;
+			animation-delay: -5s;
+		}
+
+		@keyframes float {
+			0% { transform: translate(0, 0) scale(1); }
+			33% { transform: translate(30px, -50px) scale(1.1); }
+			66% { transform: translate(-20px, 20px) scale(0.9); }
+			100% { transform: translate(0, 0) scale(1); }
+		}
+
+		@keyframes slideUpFade {
+			from {
+				opacity: 0;
+				transform: translateY(40px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		@keyframes inputFocus {
+			0% { transform: scaleX(0); }
+			100% { transform: scaleX(1); }
+		}
+
+		main {
+			margin-top: 120px;
+			min-height: calc(100vh - 120px);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 20px;
+		}
+		
+		.container {
+			width: 100%;
+			max-width: 440px;
+			margin: 0 auto;
+			animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+		}
+
+		/* Glassmorphism Card */
+		.card {
+			background: var(--card-bg);
+			backdrop-filter: blur(20px);
+			-webkit-backdrop-filter: blur(20px);
+			padding: 40px;
+			border-radius: 24px;
+			box-shadow: 
+				0 20px 40px rgba(0, 51, 102, 0.08),
+				inset 0 1px 0 rgba(255, 255, 255, 0.6);
+			border: 1px solid rgba(255, 255, 255, 0.5);
+			position: relative;
+			overflow: hidden;
+		}
+		
+		.card::before {
+			content: '';
+			position: absolute;
+			top: 0; left: 0; right: 0; height: 6px;
+			background: linear-gradient(90deg, var(--primary), var(--accent));
+		}
+
+		h1 {
+			margin: 0 0 8px;
+			color: var(--primary);
+			font-size: 28px;
+			font-weight: 800;
+			letter-spacing: -0.5px;
+			text-align: center;
+		}
+
+		.subtitle {
+			text-align: center;
+			color: var(--muted);
+			font-size: 15px;
+			margin-bottom: 32px;
+		}
+
+		.form-group {
+			margin-bottom: 20px;
+			position: relative;
+		}
+
+		label {
+			display: block;
+			font-weight: 600;
+			margin-bottom: 8px;
+			color: #334155;
+			font-size: 14px;
+			transition: color 0.3s ease;
+		}
+
+		select, input {
+			width: 100%;
+			padding: 14px 16px;
+			border-radius: 12px;
+			border: 2px solid #e2e8f0;
+			background: rgba(255, 255, 255, 0.9);
+			font-family: inherit;
+			font-size: 15px;
+			color: #0f172a;
+			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		}
+
+		select:focus, input:focus {
+			outline: none;
+			border-color: var(--accent);
+			background: #ffffff;
+			box-shadow: 0 4px 12px rgba(0, 119, 200, 0.1);
+			transform: translateY(-2px);
+		}
+
+		.form-group:focus-within label {
+			color: var(--accent);
+		}
+
+		.actions {
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+			margin-top: 32px;
+		}
+
+		.btn {
+			background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+			color: #fff;
+			padding: 14px;
+			border-radius: 12px;
+			border: 0;
+			cursor: pointer;
+			font-size: 16px;
+			font-weight: 600;
+			letter-spacing: 0.5px;
+			transition: all 0.3s ease;
+			box-shadow: 0 4px 12px rgba(0, 119, 200, 0.2);
+			position: relative;
+			overflow: hidden;
+		}
+
+		.btn::after {
+			content: '';
+			position: absolute;
+			top: 0; left: -100%; width: 50%; height: 100%;
+			background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+			transform: skewX(-20deg);
+			transition: left 0.5s ease;
+		}
+
+		.btn:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 8px 20px rgba(0, 119, 200, 0.3);
+		}
+
+		.btn:hover::after {
+			left: 150%;
+		}
+
+		.btn:active {
+			transform: translateY(0);
+		}
+
+		.back-link {
+			color: var(--muted);
+			font-size: 14px;
+			text-align: center;
+			text-decoration: none;
+			font-weight: 500;
+			transition: color 0.2s ease;
+		}
+
+		.back-link:hover {
+			color: var(--primary);
+			text-decoration: underline;
+		}
+
+		.error {
+			color: #e11d48;
+			font-size: 14px;
+			margin-top: 12px;
+			padding: 10px;
+			background: #ffe4e6;
+			border-radius: 8px;
+			border-left: 4px solid #e11d48;
+			text-align: left;
+			animation: slideUpFade 0.3s ease forwards;
+		}
+
+		.hint {
+			font-size: 12px;
+			color: #94a3b8;
+			margin-top: 24px;
+			text-align: center;
+			line-height: 1.6;
+		}
+	</style>
+</head>
+<body>
+	<div class="bg-shape shape-1"></div>
+	<div class="bg-shape shape-2"></div>
+
+	<main>
+		<div class="container">
+			<div class="card">
+				<h1>Welcome Back</h1>
+				<p class="subtitle">Sign in to access the DTI Lab portal</p>
+				<form id="loginForm">
+					<div class="form-group">
+						<label for="role">Account Type</label>
+						<select id="role" required>
+							<option value="Student">Student</option>
+							<option value="Admin">Administrator</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label for="email">Email Address</label>
+						<input id="email" type="email" placeholder="you@lendi.edu.in" required />
+					</div>
+
+					<div class="form-group">
+						<div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
+							<label for="password" style="margin-bottom: 0;">Password</label>
+							<button type="button" id="forgotPasswordBtn" style="background: none; border: none; color: var(--accent); font-size: 13px; font-weight: 500; cursor: pointer; padding: 0;">Forgot Password?</button>
+						</div>
+						<input id="password" type="password" placeholder="Enter your password" required />
+					</div>
+
+					<div class="actions">
+						<button class="btn" type="submit">Sign In</button>
+						<a href="index.html" class="back-link">← Back to Homepage</a>
+					</div>
+
+					<div id="error" class="error-message" role="alert" aria-live="polite" style="display:none"></div>
+					<div id="success" class="success-message" role="alert" aria-live="polite" style="display:none"></div>
+					<div class="hint">This portal uses highly secured authentication. By logging in, you agree to our terms of service and acceptable use policy.</div>
+				</form>
+			</div>
+		</div>
+	</main>
+
+	<script src="js/header-loader.js"></script>
+	<script type="module" src="js/auth.js"></script>
+</body>
+</html>
