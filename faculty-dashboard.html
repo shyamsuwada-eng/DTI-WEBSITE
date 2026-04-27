@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#003366">
+	<link rel="manifest" href="manifest.json">
+	<link rel="apple-touch-icon" href="logo.webp">
+	<title>Faculty Dashboard | DTI Lab – Lendi Institute</title>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+	<main class="container">
+		<div class="dashboard-header">
+			<div>
+				<h1 class="dashboard-title">Faculty Dashboard</h1>
+				<p class="dashboard-subtitle">Review and approve student project submissions</p>
+			</div>
+			<div class="user-info">
+				<span id="userEmail"></span>
+				<button id="logoutBtn" class="btn-secondary">Logout</button>
+			</div>
+		</div>
+
+		<!-- Statistics Cards -->
+		<div class="stats-grid">
+			<div class="stat-card">
+				<div class="stat-value" id="pendingProjects">0</div>
+				<div class="stat-label">Pending Reviews</div>
+			</div>
+			<div class="stat-card">
+				<div class="stat-value" id="approvedProjects">0</div>
+				<div class="stat-label">Approved Projects</div>
+			</div>
+			<div class="stat-card">
+				<div class="stat-value" id="rejectedProjects">0</div>
+				<div class="stat-label">Rejected Projects</div>
+			</div>
+			<div class="stat-card">
+				<div class="stat-value" id="totalProjects">0</div>
+				<div class="stat-label">Total Submissions</div>
+			</div>
+		</div>
+
+		<!-- Controls Bar -->
+		<div class="controls-bar">
+			<div class="search-box">
+				<input type="text" id="searchInput" placeholder="🔍 Search projects by title, student name...">
+				<select id="statusFilter">
+					<option value="all">All Status</option>
+					<option value="pending">Pending</option>
+					<option value="approved">Approved</option>
+					<option value="rejected">Rejected</option>
+				</select>
+			</div>
+			<div class="filter-buttons">
+				<button id="refreshBtn" class="btn-secondary">🔄 Refresh</button>
+			</div>
+		</div>
+
+		<!-- Projects Table -->
+		<div class="table-container">
+			<table class="projects-table">
+				<thead>
+					<tr>
+						<th>Project Title</th>
+						<th>Student</th>
+						<th>Domain</th>
+						<th>Year</th>
+						<th>Submitted</th>
+						<th>Status</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody id="projectsTableBody">
+					<tr>
+						<td colspan="7" style="text-align:center">Loading projects...</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<!-- Analytics Charts -->
+		<div class="charts-section">
+			<h3>Analytics Overview</h3>
+			<div class="charts-grid">
+				<div class="chart-card">
+					<h4>Projects by Domain</h4>
+					<canvas id="domainChart"></canvas>
+				</div>
+				<div class="chart-card">
+					<h4>Monthly Submissions</h4>
+					<canvas id="monthlyChart"></canvas>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<!-- Review Modal -->
+	<div id="reviewModal" class="modal">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 id="modalTitle">Review Project</h3>
+				<button class="modal-close" onclick="closeReviewModal()">×</button>
+			</div>
+			<div class="modal-body" id="modalBody">
+				<!-- Project details will be loaded here -->
+			</div>
+			<div class="modal-footer">
+				<button class="btn-danger" onclick="updateProjectStatus('rejected')">Reject</button>
+				<button class="btn-success" onclick="updateProjectStatus('approved')">Approve</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- Load Header Dynamically -->
+	<script src="header-loader.js"></script>
+	<script type="module" src="faculty.js"></script>
+</body>
+</html>

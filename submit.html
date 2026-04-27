@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#003366">
+	<link rel="manifest" href="manifest.json">
+	<link rel="apple-touch-icon" href="logo.webp">
+	<title>Submit Project | DTI Lab – Lendi Institute</title>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+	<main class="container">
+		<div class="form-header">
+			<h1 class="form-title">Submit Your Project</h1>
+			<p class="form-subtitle">Share your innovative project with the DTI Lab community</p>
+		</div>
+
+		<div class="form-card">
+			<form id="projectForm">
+				<!-- Project Information -->
+				<div class="form-section">
+					<h3 class="section-title">Project Information</h3>
+
+					<div class="form-group">
+						<label for="projectName">Project Name <span style="color:var(--error)">*</span></label>
+						<input type="text" id="projectName" placeholder="Enter project name" required>
+						<div class="helper-text">Only this field is required to submit</div>
+					</div>
+
+					<div class="form-row">
+						<div class="form-group">
+							<label for="domain">Domain <span style="color:var(--muted);font-weight:400;font-size:12px;">(optional)</span></label>
+							<select id="domain">
+								<option value="">Select Domain</option>
+								<option value="iot">IoT</option>
+								<option value="embedded">Embedded Systems</option>
+								<option value="signal">Signal Processing</option>
+								<option value="robotics">Robotics</option>
+								<option value="wireless">Wireless Communication</option>
+								<option value="other">Other</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="year">Year of Study <span style="color:var(--muted);font-weight:400;font-size:12px;">(optional)</span></label>
+							<select id="year">
+								<option value="">Select Year</option>
+								<option value="2">2nd Year</option>
+								<option value="3">3rd Year</option>
+								<option value="4">4th Year</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="description">Project Description <span style="color:var(--muted);font-weight:400;font-size:12px;">(optional)</span></label>
+						<textarea id="description" placeholder="Describe your project, objectives, and implementation..."></textarea>
+						<div class="helper-text">A brief description helps reviewers understand your project</div>
+					</div>
+				</div>
+
+				<!-- Team Members -->
+				<div class="form-section">
+					<h3 class="section-title">Team Members</h3>
+					<p class="helper-text">Add all team members involved in the project</p>
+
+					<div class="team-section" id="teamSection">
+						<div class="team-member">
+							<input type="text" class="team-input" placeholder="Team member name" value="">
+							<input type="text" class="team-reg" placeholder="Registration Number" value="">
+							<label style="margin: 0; font-size: 12px; color: var(--muted);">Lead</label>
+						</div>
+					</div>
+
+					<button type="button" class="btn-add" onclick="addTeamMember()">+ Add Team Member</button>
+				</div>
+
+				<!-- Documentation -->
+				<div class="form-section">
+					<h3 class="section-title">Documentation</h3>
+
+					<div class="form-group">
+						<label for="document">Upload Documentation (PDF, DOC) <span style="color:var(--muted);font-weight:400;font-size:12px;">(optional)</span></label>
+						<input type="file" id="document" accept=".pdf,.doc,.docx">
+						<div class="file-info">Maximum file size: 10MB. Supported formats: PDF, DOC, DOCX</div>
+					</div>
+
+
+					<div class="form-group">
+						<label for="links">Project Links (GitHub, Website, etc.)</label>
+						<input type="text" id="links" placeholder="https://github.com/...">
+						<div class="helper-text">Provide links to source code repositories or project website</div>
+					</div>
+				</div>
+
+				<!-- Group Photo -->
+				<div class="form-section">
+					<h3 class="section-title">Group Photo</h3>
+
+					<div class="form-group">
+						<label for="groupPhoto">Upload Group Photo (JPG, PNG)</label>
+						<input type="file" id="groupPhoto" accept=".jpg,.jpeg,.png,.gif">
+						<div class="file-info">Maximum file size: 10MB. Supported formats: JPG, PNG, GIF</div>
+					</div>
+				</div>
+
+				<!-- Project Presentation -->
+				<div class="form-section">
+					<h3 class="section-title">Project Presentation</h3>
+
+					<div class="form-group">
+						<label for="presentation">Upload Presentation (PPT, PDF)</label>
+						<input type="file" id="presentation" accept=".ppt,.pptx,.pdf">
+						<div class="file-info">Maximum file size: 25MB. Supported formats: PPT, PPTX, PDF</div>
+					</div>
+				</div>
+
+				<!-- Submission -->
+				<div class="form-actions">
+					<button type="submit" class="btn-submit">Submit Project</button>
+					<button type="button" class="btn-cancel" onclick="window.history.back()">Cancel</button>
+				</div>
+			</form>
+		</div>
+	</main>
+
+	<!-- Footer -->
+	<footer>
+		<div class="footer-container">
+			<div class="footer-content">
+				<div class="footer-section">
+					<h3>About Lendi Institute</h3>
+					<p>Lendi Institute of Engineering &amp; Technology is committed to academic excellence, research, and industry collaboration.</p>
+				</div>
+				<div class="footer-section">
+					<h3>Contact Us</h3>
+					<p><strong>Email:</strong> dtilab@lendi.edu.in</p>
+					<p><strong>Phone:</strong> 9490344747</p>
+				</div>
+			</div>
+			<div class="footer-bottom">
+				<p>&copy; 2024 Lendi Institute. All rights reserved.</p>
+			</div>
+		</div>
+	</footer>
+
+	<!-- Load Header Dynamically -->
+	<script src="header-loader.js"></script>
+	<script type="module" src="submit.js"></script>
+	<script>
+		function addTeamMember() {
+			const teamSection = document.getElementById('teamSection');
+			const newMember = document.createElement('div');
+			newMember.className = 'team-member';
+			newMember.innerHTML = `
+				<input type="text" class="team-input" placeholder="Team member name" required>
+				<input type="text" class="team-reg" placeholder="Registration Number" required>
+				<button type="button" class="btn-remove" onclick="this.parentElement.remove()">Remove</button>
+			`;
+			teamSection.appendChild(newMember);
+		}
+	</script>
+</body>
+</html>

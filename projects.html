@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#003366">
+	<link rel="manifest" href="manifest.json">
+	<link rel="apple-touch-icon" href="logo.webp">
+	<title>Student Projects | DTI Lab – Lendi Institute</title>
+	<meta name="description" content="Explore innovative student projects from the ECE Department at Lendi Institute of Engineering & Technology.">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.comments-panel {
+			background: rgba(255, 255, 255, 0.96);
+			border: 1px solid rgba(15, 23, 42, 0.08);
+			border-radius: 16px;
+			padding: 18px;
+		}
+
+		.comment-loading,
+		.comment-empty,
+		.comment-error {
+			font-size: 14px;
+			color: var(--muted);
+			padding: 12px 0;
+		}
+
+		.comment-item {
+			padding: 14px 0;
+			border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+		}
+
+		.comment-item:last-child {
+			border-bottom: none;
+		}
+
+		.comment-meta {
+			font-size: 12px;
+			color: var(--muted);
+			margin-bottom: 8px;
+		}
+
+		.comment-login-prompt a {
+			color: var(--accent);
+			font-weight: 600;
+		}
+
+		.btn-comment-toggle {
+			background: #f3f4f6;
+			color: var(--text-dark);
+			border: 1px solid rgba(15, 23, 42, 0.08);
+			border-radius: 10px;
+			padding: 10px 14px;
+			font-size: 13px;
+			cursor: pointer;
+		}
+
+		.btn-comment-toggle:hover {
+			background: #e2e8f0;
+		}
+
+		.comment-count {
+			font-size: 13px;
+			color: var(--muted);
+		}
+
+		.rating-summary,
+		.comment-rating,
+		.feedback-summary-header {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			font-size: 13px;
+			color: var(--muted);
+		}
+
+		.rating-summary {
+			margin-top: 6px;
+		}
+
+		.feedback-summary-header {
+			padding: 8px 0 12px;
+			border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+			margin-bottom: 6px;
+		}
+
+		.rating-stars {
+			display: inline-flex;
+			gap: 1px;
+			color: #f59e0b;
+			font-size: 14px;
+			line-height: 1;
+		}
+
+		.rating-stars .star {
+			opacity: 0.35;
+		}
+
+		.rating-stars .star.filled {
+			opacity: 1;
+		}
+	</style>
+</head>
+<body>
+
+<main>
+	<div class="page-hero">
+		<p class="section-eyebrow" style="color:rgba(255,255,255,.72);margin-bottom:10px;">DTI Lab — ECE Department</p>
+		<h1 class="page-hero-title">Student Projects</h1>
+		<p class="page-hero-sub">Discover innovative projects built by our talented engineering students.</p>
+	</div>
+
+	<div class="projects-wrap">
+		<!-- Enhanced Filters -->
+		<div class="advanced-filters">
+			<div class="filter-row">
+				<div class="search-container">
+					<input type="text" id="searchInput" placeholder="🔍 Search projects by title, student, keywords...">
+					<div id="searchSuggestions" class="search-suggestions" style="display:none;"></div>
+				</div>
+				<select id="domainFilter">
+					<option value="all">All Domains</option>
+					<option value="IoT">IoT</option>
+					<option value="Embedded Systems">Embedded Systems</option>
+					<option value="Signal Processing">Signal Processing</option>
+					<option value="Robotics">Robotics</option>
+					<option value="Wireless Communication">Wireless Communication</option>
+					<option value="Other">Other</option>
+				</select>
+				<select id="yearFilter">
+					<option value="all">All Years</option>
+					<option value="2">2nd Year</option>
+					<option value="3">3rd Year</option>
+					<option value="4">4th Year</option>
+				</select>
+				<select id="techFilter">
+					<option value="all">All Technologies</option>
+					<option value="AI">AI & ML</option>
+					<option value="IoT">IoT</option>
+					<option value="Web">Web Development</option>
+					<option value="Mobile">Mobile Apps</option>
+					<option value="Robotics">Robotics</option>
+					<option value="Cybersecurity">Cybersecurity</option>
+					<option value="Cloud">Cloud Computing</option>
+					<option value="Data Science">Data Science</option>
+				</select>
+				<button id="clearFilters" class="btn-secondary">Clear Filters</button>
+				<button class="add-btn" id="addProjectBtn">+ Submit Project</button>
+			</div>
+		</div>
+
+		<!-- Project Recommendations -->
+		<div id="projectRecommendations" class="recommendations-section" style="display:none;"></div>
+
+		<div class="grid" id="projectsGrid">
+			<!-- Projects loaded dynamically -->
+		</div>
+	</div>
+</main>
+
+<footer>
+	<div class="footer-container">
+		<div class="footer-content">
+			<div class="footer-section">
+				<h3>About Lendi Institute</h3>
+				<p>Committed to academic excellence, research, and industry collaboration.</p>
+			</div>
+			<div class="footer-section">
+				<h3>Contact Us</h3>
+				<p><strong>Phone:</strong> 9490344747, 9490304747</p>
+				<p><strong>Email:</strong> principal@lendi.edu.in</p>
+			</div>
+			<div class="footer-section">
+				<h3>Quick Links</h3>
+				<p><a href="index.html">Home</a></p>
+				<p><a href="submit.html">Submit Project</a></p>
+				<p><a href="http://www.lendi.edu.in" target="_blank" rel="noopener">Official Website ↗</a></p>
+			</div>
+		</div>
+		<div class="footer-bottom">
+			<p>&copy; 2024 Lendi Institute of Engineering &amp; Technology. All rights reserved.</p>
+		</div>
+	</div>
+</footer>
+
+<script src="header-loader.js"></script>
+<script type="module" src="projects.js"></script>
+<script>
+	// Patch filter select to use new id
+	document.addEventListener('DOMContentLoaded', () => {
+		const sel = document.getElementById('filterDomain');
+		if (sel && !sel.dataset.patched) {
+			sel.dataset.patched = '1';
+			sel.className = 'select';
+		}
+	});
+</script>
+</body>
+</html>
